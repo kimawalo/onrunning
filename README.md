@@ -57,7 +57,7 @@ Looking at the `kubernetes` directory we can see the definition of a deployment 
 
 
 
-# Platform engineering challenge
+# Platform engineering challenge 2
 > To be used in the technical task
 ## Context
 
