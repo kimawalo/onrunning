@@ -3,8 +3,12 @@ FROM ruby:${RUBY_VERSION}}
 
 # FROM ruby:2.7.3
 
-# Install required OS packages for the existing dependencies
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+## Install required OS packages for the existing dependencies
+#RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=shared \
+    --mount=type=cache,target=/var/lib/apt,sharing=shared \
+    apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
 # Create the application directory
 RUN mkdir /myapp
