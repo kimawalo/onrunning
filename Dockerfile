@@ -1,6 +1,7 @@
-ARG  RUBY_VERSION=./blog/.ruby-version
+ARG  RUBY_VERSION="${./blog/.ruby-version}"
 # FROM ruby:2.7.3
-FROM ruby:${RUBY_VERSION}}
+FROM ruby:$RUBY_VERSION
+## Deal with it later.
 
 ## Install required OS packages for the existing dependencies
 #RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs

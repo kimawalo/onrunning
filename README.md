@@ -18,8 +18,8 @@ There are some improvements and bug fixes that can be made in:
 ### Containers
 
 - [x] Looking at the Dockerfile, how can we avoid busting the cache for the dependency update everytime we update the source code ?
+- [ ] Use build arguments so we can use the same ruby version as defined in file `blog/.ruby-version` as opposed of an hardcoded image version
 - [ ] Ideally the image size for running in production should be less than 1GB (**bonus**)
-- [x] Use build arguments so we can use the same ruby version as defined in file `blog/.ruby-version` as opposed of an hardcoded image version
 
 ### Continuous Deployment
 
