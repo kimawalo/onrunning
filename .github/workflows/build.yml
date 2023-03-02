@@ -1,4 +1,5 @@
 name: Build
+run-name: ran by ${{ github.actor }}
 
 on:
   push:
@@ -9,6 +10,7 @@ on:
       - master
 
 jobs:
+
   build:
     name: Build Image
     runs-on: ubuntu-latest
@@ -17,7 +19,56 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v1
 
-      - name: Build Image
+      - name: Build image
         run: |
           docker-compose build
 
+  upload-to-aws-ecr:
+    needs: build
+    name: Upload build image to AWS ECR
+      - name: Upload Image to AWS ECR
+        uses: actions/upload-artifact@v3
+        with:
+          registry: 000000000000.dkr.ecr.us-east-1.amazonaws.com/blog
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
+          image: my-image:dev-${{ github.sha }}
+        run: |
+          aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+
+  set-image-for-k8s-deployment:
+    name: Set Image for K8s Deployment 'Blog'
+  
+
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      # see: https://github.com/aws-actions/configure-aws-credentials
+
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      # see: https://github.com/aws-actions/amazon-ecr-login
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: 000000000000.dkr.ecr.us-east-1.amazonaws.com/blog
+          ECR_REPOSITORY: onrunning
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Log out of Amazon ECR
+        if: always()
+        run: docker logout $ECR_REGISTRY
