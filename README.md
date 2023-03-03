@@ -25,8 +25,8 @@ There are some improvements and bug fixes that can be made in:
 
 Using `.github/workflows/build.yml`:
 
-- [*] Add the neccessary steps to tag the image based on the git commit hash
-- [*] Uploaded to AWS ECR using `000000000000.dkr.ecr.us-east-1.amazonaws.com/blog` as registry and github actions secrets `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID`
+- [x] Add the neccessary steps to tag the image based on the git commit hash
+- [x] Uploaded to AWS ECR using `000000000000.dkr.ecr.us-east-1.amazonaws.com/blog` as registry and github actions secrets `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID`
 - [x] Add another job, that depends on the build job, which would call `kubectl` to set the image for the k8s deployment named `blog` (assume the kubectl config file exists locally with the name `k8s.config`)
 - [ ] Alternatively, use the manifests under `kubernetes` to apply the change. There's a TAG placeholder that can be used in to replace with the actual commit hash.
 - [x] Add a step on this job that would monitor the deployment progress (**bonus**)
@@ -43,7 +43,7 @@ In `monitor.tf` there are two resources with an imaginary type that define datab
 
 Looking at the `kubernetes` directory we can see the definition of a deployment and a service
 
-- [ ] What kubectl command would you use to create an HorizontalPodAutoscaler with 1 minimum and 20 max replicas triggered by a cpu usage threshold of 70% ?
+- [x] What kubectl command would you use to create an HorizontalPodAutoscaler with 1 minimum and 20 max replicas triggered by a cpu usage threshold of 70% ?
     kubectl autoscale deployment blog --min=1 --max=20 --cpu-percent=70
 
 - [ ] Assuming the subdomain `blog.info` how would you expose this application to the world ?
