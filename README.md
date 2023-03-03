@@ -44,12 +44,12 @@ In `monitor.tf` there are two resources with an imaginary type that define datab
 Looking at the `kubernetes` directory we can see the definition of a deployment and a service
 
 - [x] What kubectl command would you use to create an HorizontalPodAutoscaler with 1 minimum and 20 max replicas triggered by a cpu usage threshold of 70% ?
-- [ ] Assuming the subdomain `blog.info` how would you expose this application to the world ?
-- [ ] Write the necessary configuration manifest to make it happen
-
 ```
 kubectl autoscale deployment blog --min=1 --max=20 --cpu-percent=70
 ```
+- [ ] Assuming the subdomain `blog.info` how would you expose this application to the world ?
+- [ ] Write the necessary configuration manifest to make it happen
+
 
 
 
