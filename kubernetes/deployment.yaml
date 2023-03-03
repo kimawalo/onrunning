@@ -17,7 +17,11 @@ spec:
 
     spec:
       securityContext: {}
+      env:
+        name: TAG
+        value: # 
       containers:
-      - image: 000000000000.dkr.ecr.us-east-1.amazonaws.com/blog:TAG
+      - name: blog
+        image: 000000000000.dkr.ecr.us-east-1.amazonaws.com/blog:$TAG
         imagePullPolicy: IfNotPresent
-        name: blog
+        

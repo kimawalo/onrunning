@@ -35,7 +35,7 @@ jobs:
           region: us-east-1
           image: my-image:dev-${{ github.sha }}
         run: |
-          aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+          aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin 000000000000.dkr.ecr.us-east-1.amazonaws.com
 
   set-image-for-k8s-deployment:
     name: Set Image for K8s Deployment 'Blog'
@@ -65,10 +65,23 @@ jobs:
           ECR_REGISTRY: 000000000000.dkr.ecr.us-east-1.amazonaws.com/blog
           ECR_REPOSITORY: onrunning
           IMAGE_TAG: ${{ github.sha }}
+          IMAGE_ADRESS: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t $IMAGE_ADRESS .
+          docker push $IMAGE_ADRESS
 
       - name: Log out of Amazon ECR
         if: always()
         run: docker logout $ECR_REGISTRY
+  
+  deploy:
+    name: Deploy image
+    needs: build
+
+    steps:
+      - name: Call image for k8s "blog" deployment
+        run: |
+          # start a single instance of blog
+          kubectl create deployment blog --image=$IMAGE_ADDRESS
+          # Watch rolling update status of "blog" deployment until completion
+          kubectl rollout status -w deployment/frontend

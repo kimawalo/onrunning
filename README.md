@@ -27,9 +27,9 @@ Using `.github/workflows/build.yml`:
 
 - [*] Add the neccessary steps to tag the image based on the git commit hash
 - [*] Uploaded to AWS ECR using `000000000000.dkr.ecr.us-east-1.amazonaws.com/blog` as registry and github actions secrets `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID`
-- [ ] Add another job, that depends on the build job, which would call `kubectl` to set the image for the k8s deployment named `blog` (assume the kubectl config file exists locally with the name `k8s.config`)
+- [x] Add another job, that depends on the build job, which would call `kubectl` to set the image for the k8s deployment named `blog` (assume the kubectl config file exists locally with the name `k8s.config`)
 - [ ] Alternatively, use the manifests under `kubernetes` to apply the change. There's a TAG placeholder that can be used in to replace with the actual commit hash.
-- [ ] Add a step on this job that would monitor the deployment progress (**bonus**)
+- [x] Add a step on this job that would monitor the deployment progress (**bonus**)
 
 ### Infra with terraform
 
