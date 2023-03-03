@@ -47,8 +47,9 @@ Looking at the `kubernetes` directory we can see the definition of a deployment 
 - [ ] Assuming the subdomain `blog.info` how would you expose this application to the world ?
 - [ ] Write the necessary configuration manifest to make it happen
 
-    kubectl autoscale deployment blog --min=1 --max=20 --cpu-percent=70
-
+```
+kubectl autoscale deployment blog --min=1 --max=20 --cpu-percent=70
+```
 
 
 
