@@ -18,8 +18,8 @@ spec:
     spec:
       securityContext: {}
       env:
-        name: TAG
-        value: # 
+      - name: "TAG"
+        value: ${../blog/.ruby-version}
       containers:
       - name: blog
         image: 000000000000.dkr.ecr.us-east-1.amazonaws.com/blog:$TAG

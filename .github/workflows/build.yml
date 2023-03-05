@@ -65,10 +65,10 @@ jobs:
           ECR_REGISTRY: 000000000000.dkr.ecr.us-east-1.amazonaws.com/blog
           ECR_REPOSITORY: onrunning
           IMAGE_TAG: ${{ github.sha }}
-          IMAGE_ADRESS: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          IMAGE_ADDRESS: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         run: |
-          docker build -t $IMAGE_ADRESS .
-          docker push $IMAGE_ADRESS
+          docker build -t $IMAGE_ADDRESS .
+          docker push $IMAGE_ADDRESS
 
       - name: Log out of Amazon ECR
         if: always()
