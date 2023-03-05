@@ -23,10 +23,11 @@ There are some improvements and bug fixes that can be made in:
 ```
 - Add .dockerignore file (akin to .gitignoe) to help keep only the essntial parts of our build image
 - Opt for smaller base images, such as Alpine Linux
-- Use multi-stage builds to reduce the final image size
 - Avoid installing any development and testing dependencies on prod image
     RUN bundle config set without 'development test'
-- Combine dev, test, prod build processes into a single Dockerfile with multi-stage builds
+- Combine dev, test, prod build processes into a single Dockerfile with multi-stage builds*
+* A multi-stage build is done by creating different sections of a Dockerfile, each referencing a different base image
+# see: https://docs.docker.com/build/building/multi-stage/
 ```
 ### Continuous Deployment
 
