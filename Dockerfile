@@ -1,7 +1,6 @@
 ARG  RUBY_VERSION=${./blog/.ruby-version}
 # FROM ruby:2.7.3
 FROM ruby:$RUBY_VERSION
-## Not fully sure whether variable for ruby-version needs to be set here or in docker-compose file
 
 ## Install required OS packages for the existing dependencies
 #RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
