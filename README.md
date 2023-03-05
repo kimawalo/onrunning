@@ -26,7 +26,8 @@ There are some improvements and bug fixes that can be made in:
 - [ ] Use build arguments so we can use the same ruby version as defined in file `blog/.ruby-version` as opposed of an hardcoded image version
 - [x] Ideally the image size for running in production should be less than 1GB (**bonus**)
 ```
-- Add .dockerignore file (akin to .gitignoe) to help keep only the essntial parts of our build image
+- Add .dockerignore file (akin to .gitignoe) to help keep only the essential parts of our build image
+    # Copy .gitignore rules to .dockerignore & exclude .git/ directory from being copied over into image
 - Opt for smaller base images, such as Alpine Linux
 - Avoid installing any development and testing dependencies on prod image
     RUN bundle config set without 'development test'
