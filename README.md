@@ -20,7 +20,14 @@ There are some improvements and bug fixes that can be made in:
 - [x] Looking at the Dockerfile, how can we avoid busting the cache for the dependency update everytime we update the source code ?
 - [ ] Use build arguments so we can use the same ruby version as defined in file `blog/.ruby-version` as opposed of an hardcoded image version
 - [ ] Ideally the image size for running in production should be less than 1GB (**bonus**)
-
+```
+- Add .dockerignore file (akin to .gitignoe) to help keep only the essntial parts of our build image
+- Opt for smaller base images, such as Alpine Linux
+- Use multi-stage builds to reduce the final image size
+- Avoid installing any development and testing dependencies on prod image
+    RUN bundle config set without 'development test'
+- Combine dev, test, prod build processes into a single Dockerfile with multi-stage builds
+```
 ### Continuous Deployment
 
 Using `.github/workflows/build.yml`:
@@ -48,6 +55,9 @@ Looking at the `kubernetes` directory we can see the definition of a deployment 
 kubectl autoscale deployment blog --min=1 --max=20 --cpu-percent=70
 ```
 - [ ] Assuming the subdomain `blog.info` how would you expose this application to the world ?
+```
+kubectl expose deployment/blog --type="NodePort" --port 8080
+```
 - [ ] Write the necessary configuration manifest to make it happen
 
 
