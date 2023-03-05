@@ -22,7 +22,6 @@ There are some improvements and bug fixes that can be made in:
 - Placing the least likely to change commands at the top ensures an efficient usage of the Docker cache
 - Only copying the files needed for the next step minimizes cache invalidation in the build process
 # see: https://docs.docker.com/build/cache/
-
 ```
 - [ ] Use build arguments so we can use the same ruby version as defined in file `blog/.ruby-version` as opposed of an hardcoded image version
 - [x] Ideally the image size for running in production should be less than 1GB (**bonus**)
