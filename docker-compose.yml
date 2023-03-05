@@ -20,6 +20,7 @@ services:
       - "3000:3000"
     environment:
       - RAILS_ENV=development
+      - RUBY_VERSION=${./ruby-version}
     depends_on:
       - database
 

@@ -23,7 +23,10 @@ There are some improvements and bug fixes that can be made in:
 - Only copying the files needed for the next step minimizes cache invalidation in the build process
     # see: https://docs.docker.com/build/cache/
 ```
-- [ ] Use build arguments so we can use the same ruby version as defined in file `blog/.ruby-version` as opposed of an hardcoded image version
+- [x] Use build arguments so we can use the same ruby version as defined in file `blog/.ruby-version` as opposed of an hardcoded image version
+```
+# Not fully sure whether a variable for ruby-version needs to be set in docker-compose (as env var) or in Dockerfile (as ARG)... I tried both.
+```
 - [x] Ideally the image size for running in production should be less than 1GB (**bonus**)
 ```
 - Add .dockerignore file (akin to .gitignoe) to help keep only the essential parts of our build image
