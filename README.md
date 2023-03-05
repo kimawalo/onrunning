@@ -64,9 +64,10 @@ Looking at the `kubernetes` directory we can see the definition of a deployment 
 ```
 kubectl autoscale deployment blog --min=1 --max=20 --cpu-percent=70
 ```
-- [ ] Assuming the subdomain `blog.info` how would you expose this application to the world ?
+- [x] Assuming the subdomain `blog.info` how would you expose this application to the world ?
 ```
-kubectl expose deployment/blog --type="LoadBalancer" --port 8080
+kubectl expose deployment blog --port=8765 --target-port=9376 \
+        --name=blog --type=LoadBalancer
 ```
 - [x] Write the necessary configuration manifest to make it happen
 ```
