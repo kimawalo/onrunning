@@ -53,8 +53,15 @@ Using `.github/workflows/build.yml`:
 Looking at the `infra` directory, databases are defined in `rds.tf`
 In `monitor.tf` there are two resources with an imaginary type that define database monitors
 
-- [ ] How can we simplify the change of values that keep repeating ?
-- [ ] If we get a request to create 20 more databases, how can we avoid duplicating some of the code for the required 40 extra monitors ? (hint: we might want to adjust the values for each monitor)
+- [x] How can we simplify the change of values that keep repeating ?
+```
+# see: variables.tf and monitor.tf file
+# Repetitions could further be modularized, depending on the environment needs
+```
+- [x] If we get a request to create 20 more databases, how can we avoid duplicating some of the code for the required 40 extra monitors ? (hint: we might want to adjust the values for each monitor)
+```
+# see: "count" and "count.index" in monitor.tf file 
+```
 
 ### Kubernetes
 
